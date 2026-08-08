@@ -1,2 +1,489 @@
-# 413printingservices
-Landing Page of 413 Printing Services
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>413 Printing Services — Mandaluyong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --coral:#F4908C;
+    --sky:#A8CFDD;
+    --peach:#F5C08A;
+    --ink:#1C1C1C;
+    --paper:#FDFBF7;
+    --paper-dim:#F4EFE6;
+    --line: rgba(28,28,28,0.14);
+    --radius: 20px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Baloo 2', sans-serif;
+    font-weight:700;
+    letter-spacing:-0.01em;
+  }
+  .mono{
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.04em;
+    text-transform:uppercase;
+  }
+  a{color:inherit; text-decoration:none;}
+  img{max-width:100%; display:block;}
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+  section{padding:88px 0;}
+  @media (max-width:720px){ section{padding:64px 0;} }
+
+  /* ---------- focus ---------- */
+  a:focus-visible, button:focus-visible{
+    outline:3px solid var(--ink);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(253,251,247,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 28px;
+    max-width:1100px; margin:0 auto;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+  }
+  .brand-tiles{ display:flex; gap:3px; }
+  .tile{
+    width:22px; height:26px;
+    border:2.5px solid var(--ink);
+    border-radius:7px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Baloo 2'; font-weight:700; font-size:14px;
+  }
+  .tile.coral{background:var(--coral);}
+  .tile.sky{background:var(--sky);}
+  .tile.peach{background:var(--peach);}
+  .brand-name{
+    font-family:'Baloo 2'; font-weight:700; font-size:16px; line-height:1.1;
+  }
+  .brand-name span{display:block; font-family:'Inter'; font-weight:500; font-size:10.5px; letter-spacing:0.06em; text-transform:uppercase; color:#6b6b6b;}
+  nav.links{
+    display:flex; align-items:center; gap:28px;
+    font-weight:600; font-size:14.5px;
+  }
+  nav.links a{ padding:6px 0; margin-right:28px; border-bottom:2px solid transparent; }
+  nav.links a:last-child{ margin-right:0; }
+  nav.links a:hover{ border-color:var(--ink); }
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    font-weight:700; font-size:14.5px;
+    padding:11px 20px;
+    border-radius:100px;
+    border:2px solid var(--ink);
+    background:var(--ink);
+    color:var(--paper);
+    transition:transform .15s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{ transform:translateY(-2px); }
+  .btn.outline{ background:transparent; color:var(--ink); }
+  .btn.small{ padding:9px 16px; font-size:13.5px; }
+  @media (max-width:860px){ nav.links{display:none;} }
+
+  /* ---------- hero ---------- */
+  .hero{
+    padding-top:64px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:56px;
+    align-items:center;
+  }
+  @media (max-width:860px){ .hero{grid-template-columns:1fr; gap:40px;} }
+  .eyebrow{
+    font-size:12.5px; font-weight:700; color:#7a5b3e;
+    display:flex; align-items:center; gap:8px; margin-bottom:18px;
+  }
+  .eyebrow .dot{width:7px; height:7px; border-radius:50%; background:var(--coral);}
+  .hero h1{
+    font-size:clamp(36px, 5vw, 56px);
+    line-height:1.04;
+    margin-bottom:20px;
+  }
+  .hero h1 .hl{
+    background:linear-gradient(transparent 62%, var(--peach) 62%);
+  }
+  .hero p.lead{
+    font-size:17px; color:#3c3c3c; max-width:46ch; margin-bottom:30px;
+  }
+  .hero-ctas{ display:flex; flex-wrap:wrap; gap:12px; }
+
+  .hero-visual{
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+    min-height:300px;
+    height:300px;
+  }
+  .stack{ position:relative; width:100%; max-width:340px; height:100%; }
+  .swatch{
+    position:absolute;
+    width:170px; height:210px;
+    border:3px solid var(--ink);
+    border-radius:24px;
+    box-shadow:0 10px 0 -4px rgba(28,28,28,0.08);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:10px;
+  }
+  .swatch .num{ font-family:'Baloo 2'; font-weight:800; font-size:56px; }
+  .swatch .cap{ font-family:'Space Mono'; font-size:10.5px; letter-spacing:0.08em; text-transform:uppercase; }
+  .swatch.s1{ background:var(--coral); left:0; top:38px; transform:rotate(-9deg); z-index:1;}
+  .swatch.s2{ background:var(--sky); left:90px; top:8px; transform:rotate(4deg); z-index:2;}
+  .swatch.s3{ background:var(--peach); left:180px; top:48px; transform:rotate(12deg); z-index:1;}
+  @media (max-width:860px){
+    .hero-visual{ height:240px; min-height:240px; margin-top:20px;}
+    .swatch{width:130px; height:165px;}
+    .swatch .num{font-size:40px;}
+    .swatch.s1{top:24px;} .swatch.s2{top:0; left:60px;} .swatch.s3{top:34px; left:120px;}
+  }
+
+  /* ---------- section headings ---------- */
+  .sec-head{ max-width:560px; margin-bottom:44px; }
+  .sec-eyebrow{
+    font-family:'Space Mono'; font-size:11.5px; letter-spacing:0.1em; text-transform:uppercase;
+    color:#7a5b3e; margin-bottom:10px; display:block;
+  }
+  .sec-head h2{ font-size:clamp(26px,3.4vw,34px); }
+  .sec-head p{ color:#454545; margin-top:12px; font-size:15.5px; }
+
+  /* ---------- about ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start;
+  }
+  @media (max-width:820px){ .about-grid{grid-template-columns:1fr;} }
+  .about-grid p{ font-size:16px; color:#333; }
+  .stat-strip{ display:grid; grid-template-columns:repeat(3,1fr); gap:14px; }
+  .stat{
+    border:2px solid var(--ink); border-radius:16px; padding:18px 14px;
+    text-align:center; background:var(--paper-dim);
+  }
+  .stat .n{ font-family:'Baloo 2'; font-weight:800; font-size:26px; }
+  .stat .l{ font-size:11.5px; color:#555; margin-top:4px; }
+
+  /* ---------- services: docket cards ---------- */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:20px;
+  }
+  @media (max-width:900px){ .services-grid{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:520px){ .services-grid{grid-template-columns:1fr;} }
+  .docket{
+    background:var(--paper);
+    border:2.5px solid var(--ink);
+    border-radius:18px;
+    padding:24px 20px 20px;
+    position:relative;
+    display:flex; flex-direction:column; gap:14px;
+  }
+  .docket::before, .docket::after{
+    content:""; position:absolute; width:16px; height:16px; background:var(--paper);
+    border:2.5px solid var(--ink); border-radius:50%; top:50%; transform:translateY(-50%);
+  }
+  .docket::before{ left:-10px; }
+  .docket::after{ right:-10px; }
+  .icon-tile{
+    width:52px; height:52px; border:2.5px solid var(--ink); border-radius:14px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .icon-tile svg{ width:26px; height:26px; }
+  .docket h3{ font-size:17px; }
+  .docket p{ font-size:13.8px; color:#454545; flex-grow:1; }
+  .docket .tag{
+    font-family:'Space Mono'; font-size:10px; letter-spacing:0.06em; text-transform:uppercase;
+    border-top:1.5px dashed var(--line); padding-top:12px; color:#7a5b3e;
+  }
+  .c1 .icon-tile{ background:var(--coral); }
+  .c2 .icon-tile{ background:var(--sky); }
+  .c3 .icon-tile{ background:var(--peach); }
+  .c4 .icon-tile{ background:var(--coral); }
+
+  /* ---------- how it works ---------- */
+  .steps{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:24px;
+  }
+  @media (max-width:760px){ .steps{grid-template-columns:1fr;} }
+  .step{ display:flex; gap:16px; align-items:flex-start; }
+  .step .tile{
+    width:46px; height:52px; border:2.5px solid var(--ink); border-radius:12px;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Baloo 2'; font-weight:800; font-size:22px; flex-shrink:0;
+  }
+  .step:nth-child(1) .tile{ background:var(--coral); }
+  .step:nth-child(2) .tile{ background:var(--sky); }
+  .step:nth-child(3) .tile{ background:var(--peach); }
+  .step h3{ font-size:16.5px; margin-bottom:6px; }
+  .step p{ font-size:14px; color:#454545; }
+
+  /* ---------- hours + location ---------- */
+  .visit-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:32px;
+  }
+  @media (max-width:820px){ .visit-grid{grid-template-columns:1fr;} }
+  .receipt{
+    background:var(--paper-dim);
+    border:2.5px solid var(--ink);
+    border-radius:18px;
+    padding:26px 26px 20px;
+  }
+  .receipt h3{ font-size:17px; margin-bottom:16px; display:flex; align-items:center; gap:8px;}
+  .hours-row{
+    display:flex; justify-content:space-between;
+    font-family:'Space Mono'; font-size:12.5px;
+    padding:8px 0; border-bottom:1.5px dashed var(--line);
+  }
+  .hours-row:last-child{ border-bottom:none; }
+  .hours-row.today{ font-weight:700; }
+  .hours-row.today .d::after{
+    content:"•"; color:var(--coral); margin-left:6px;
+  }
+  .contact-card{
+    background:var(--paper-dim);
+    border:2.5px solid var(--ink);
+    border-radius:18px;
+    padding:26px;
+    display:flex; flex-direction:column; gap:16px;
+  }
+  .contact-card h3{ font-size:17px; }
+  .contact-line{ display:flex; gap:12px; align-items:flex-start; font-size:14.5px; }
+  .contact-line svg{ width:19px; height:19px; flex-shrink:0; margin-top:2px; }
+  .contact-ctas{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px; }
+
+  /* ---------- footer ---------- */
+  footer{
+    border-top:1px solid var(--line);
+    padding:40px 0 28px;
+  }
+  .foot-inner{
+    display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px;
+  }
+  .foot-links{ display:flex; gap:22px; font-size:13.5px; font-weight:600; flex-wrap:wrap;}
+  .foot-links a{ margin-right:22px; }
+  .foot-links a:last-child{ margin-right:0; }
+  .foot-copy{ font-size:12.5px; color:#777; margin-top:22px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <a href="#top" class="brand">
+      <div class="brand-tiles">
+        <div class="tile coral">4</div>
+        <div class="tile sky">1</div>
+        <div class="tile peach">3</div>
+      </div>
+      <div class="brand-name">413 Printing<span>Services · Mandaluyong</span></div>
+    </a>
+    <nav class="links">
+      <a href="#services">Services</a>
+      <a href="#how">How it works</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="btn small" href="tel:+639651069277">Call now</a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div>
+      <div class="eyebrow"><span class="dot"></span>413 Dr. Jose Fernandez St., Mandaluyong</div>
+      <h1>Your prints,<br>done <span class="hl">right</span> and fast.</h1>
+      <p class="lead">From business cards to IDs, documents to custom shirts — 413 Printing Services is your neighborhood one-stop print shop, built for precision and quick turnaround.</p>
+      <div class="hero-ctas">
+        <a class="btn" href="https://www.facebook.com/profile.php?id=61559028305573" target="_blank" rel="noopener">Message us on Facebook</a>
+        <a class="btn outline" href="https://maps.app.goo.gl/6NUmhGaxMQme39tz9" target="_blank" rel="noopener">Get directions</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="stack">
+        <div class="swatch s1"><div class="num">4</div><div class="cap">Cards</div></div>
+        <div class="swatch s2"><div class="num">1</div><div class="cap">Docs</div></div>
+        <div class="swatch s3"><div class="num">3</div><div class="cap">& More</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="wrap">
+    <div class="about-grid">
+      <div>
+        <span class="sec-eyebrow">About the shop</span>
+        <h2 style="margin-bottom:16px;">Precision printing, neighborhood service.</h2>
+        <p>Welcome to 413 Printing Services, your one-stop destination for high-quality printing solutions in Mandaluyong. We specialize in everything from professional business cards and stationery to documents, IDs, and custom merchandise. Whether it's a quick scan, high-volume color copies, or personalized items, our team is dedicated to precision and fast turnaround times — using reliable equipment to make sure your project looks sharp every time.</p>
+      </div>
+      <div class="stat-strip">
+        <div class="stat"><div class="n">7</div><div class="l">Days a week open</div></div>
+        <div class="stat"><div class="n">1:1</div><div class="l">Walk-in service</div></div>
+        <div class="stat"><div class="n">✓</div><div class="l">Same-day turnaround</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services" class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">What we print</span>
+      <h2>Services</h2>
+      <p>Pick what you need — every job is handled with the same attention to detail, whether it's one card or a hundred.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="docket c1">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="7.5" cy="12" r="1.6"/><line x1="12.5" y1="10" x2="18" y2="10"/><line x1="12.5" y1="13" x2="18" y2="13"/></svg>
+        </div>
+        <h3>Business Cards &amp; Stationery</h3>
+        <p>Professional cards, letterheads, and stationery that make a strong first impression.</p>
+        <div class="tag">Custom sizes · Fast turnaround</div>
+      </div>
+
+      <div class="docket c2">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h9l4 4v15H6z"/><path d="M15 2.5v4h4"/><line x1="9" y1="12" x2="16" y2="12"/><line x1="9" y1="15.5" x2="16" y2="15.5"/></svg>
+        </div>
+        <h3>Document &amp; Photo Printing</h3>
+        <p>Quick document scans, high-volume color copies, and photo prints, ready when you need them.</p>
+        <div class="tag">Color &amp; B/W · Walk-in ready</div>
+      </div>
+
+      <div class="docket c3">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><circle cx="8.5" cy="10.5" r="2"/><path d="M5.5 15.5c0-1.7 1.5-3 3-3s3 1.3 3 3"/><line x1="14.5" y1="9" x2="18.5" y2="9"/><line x1="14.5" y1="12" x2="18.5" y2="12"/></svg>
+        </div>
+        <h3>ID &amp; Lamination</h3>
+        <p>ID printing and lamination for school, work, or personal use, done while you wait.</p>
+        <div class="tag">While-U-Wait service</div>
+      </div>
+
+      <div class="docket c4">
+        <div class="icon-tile">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3 L5 6.5 7 9 9.5 6.8V21h5V6.8L17 9l2-2.5L16 3c-1 1.3-2.4 2-4 2s-3-.7-4-2Z"/></svg>
+        </div>
+        <h3>T-Shirt &amp; Mug Printing</h3>
+        <p>Custom shirts and mugs printed with your design, sharp and built to last.</p>
+        <div class="tag">Bring your own design</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">The process</span>
+      <h2>How it works</h2>
+      <p>Three simple steps from your idea to your finished print.</p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="tile">1</div>
+        <div><h3>Tell us what you need</h3><p>Walk in or message us your design, file, and specs.</p></div>
+      </div>
+      <div class="step">
+        <div class="tile">2</div>
+        <div><h3>We print it</h3><p>Our team handles your job with care and precision, start to finish.</p></div>
+      </div>
+      <div class="step">
+        <div class="tile">3</div>
+        <div><h3>Pick it up</h3><p>Fast turnaround — ready when you are, no long waits.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISIT / HOURS / CONTACT -->
+  <section id="visit" class="wrap">
+    <div class="sec-head">
+      <span class="sec-eyebrow">Find us</span>
+      <h2>Visit the shop</h2>
+      <p>Open every day of the week — drop by or reach out before you come.</p>
+    </div>
+    <div class="visit-grid">
+
+      <div class="receipt">
+        <h3>🕒 Business hours</h3>
+        <div class="hours-row"><span class="d">Sunday</span><span>8:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="d">Monday</span><span>3:00 PM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="d">Tuesday</span><span>3:00 PM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="d">Wednesday</span><span>8:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="d">Thursday</span><span>8:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="d">Friday</span><span>8:00 AM – 9:00 PM</span></div>
+        <div class="hours-row"><span class="d">Saturday</span><span>8:00 AM – 9:00 PM</span></div>
+      </div>
+
+      <div class="contact-card">
+        <h3>Get in touch</h3>
+
+        <div class="contact-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.4"/></svg>
+          <span>413 Dr. Jose Fernandez Street, Mandaluyong, 1550 Metro Manila</span>
+        </div>
+        <div class="contact-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.6 21 3 14.4 3 6a2 2 0 0 1 1-2Z"/></svg>
+          <a href="tel:+639651069277">0965 106 9277</a>
+        </div>
+        <div class="contact-line">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#1C1C1C" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2.5"/><path d="M3 6l9 7 9-7"/></svg>
+          <a href="mailto:413printingservice@gmail.com">413printingservice@gmail.com</a>
+        </div>
+
+        <div class="contact-ctas">
+          <a class="btn small" href="https://www.facebook.com/profile.php?id=61559028305573" target="_blank" rel="noopener">Facebook</a>
+          <a class="btn small outline" href="https://maps.app.goo.gl/6NUmhGaxMQme39tz9" target="_blank" rel="noopener">Get directions</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-inner">
+      <div class="brand">
+        <div class="brand-tiles">
+          <div class="tile coral" style="width:18px;height:21px;font-size:11px;">4</div>
+          <div class="tile sky" style="width:18px;height:21px;font-size:11px;">1</div>
+          <div class="tile peach" style="width:18px;height:21px;font-size:11px;">3</div>
+        </div>
+        <div class="brand-name" style="font-size:14px;">413 Printing Services</div>
+      </div>
+      <div class="foot-links">
+        <a href="#services">Services</a>
+        <a href="#how">How it works</a>
+        <a href="#visit">Visit</a>
+        <a href="https://www.facebook.com/profile.php?id=61559028305573" target="_blank" rel="noopener">Facebook</a>
+      </div>
+    </div>
+    <div class="foot-copy">© 2026 413 Printing Services · Mandaluyong, Metro Manila</div>
+  </div>
+</footer>
+
+</body>
+</html>
